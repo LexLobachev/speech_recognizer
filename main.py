@@ -4,6 +4,7 @@ from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from decouple import config
 
+from run import detect_intent_texts
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -22,7 +23,7 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 
 def echo(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text(update.message.text)
+    update.message.reply_text(detect_intent_texts(project_id, session_id, update.message.text, 'ru-Ru'))
 
 
 def main() -> None:
@@ -41,4 +42,6 @@ def main() -> None:
 
 
 if __name__ == '__main__':
+    project_id = config("PROJECT_ID")
+    session_id = config("YOUR_TELEGRAM_ID")
     main()
