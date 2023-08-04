@@ -1,14 +1,12 @@
 import logging
 
-from telegram import Update, ForceReply
+from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from decouple import config
 
 from run import detect_intent_texts
 
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-)
+logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +24,7 @@ def echo(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(detect_intent_texts(project_id, session_id, update.message.text, 'ru-Ru'))
 
 
-def main() -> None:
+def main():
     updater = Updater(config("TG_BOT_TOKEN"))
 
     dispatcher = updater.dispatcher

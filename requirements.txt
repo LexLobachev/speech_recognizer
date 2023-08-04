@@ -1,0 +1,5 @@
+google-cloud-dialogflow==2.23.2
+python-decouple==3.8
+python-telegram-bot==13.13
+requests==2.31.0
+vk-api==11.9.9
