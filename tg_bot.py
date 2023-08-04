@@ -21,7 +21,9 @@ def help_command(update: Update, context: CallbackContext):
 
 
 def reply(update: Update, context: CallbackContext):
-    update.message.reply_text(detect_intent_texts(project_id, session_id, update.message.text, 'ru-Ru'))
+    reply_to_user = detect_intent_texts(project_id, session_id, update.message.text, 'ru-Ru', is_fallback=False)
+    if reply_to_user:
+        update.message.reply_text(reply_to_user)
 
 
 def main():

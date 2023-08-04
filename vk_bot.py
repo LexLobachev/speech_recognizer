@@ -7,11 +7,13 @@ from intent_detector import detect_intent_texts
 
 
 def reply(event, vk_api, project_id):
-    vk_api.messages.send(
-        user_id=event.user_id,
-        message=detect_intent_texts(project_id, event.user_id, event.text, 'ru'),
-        random_id=random.randint(1, 1000)
-    )
+    reply_to_user = detect_intent_texts(project_id, event.user_id, event.text, 'ru', is_fallback=False)
+    if reply_to_user:
+        vk_api.messages.send(
+            user_id=event.user_id,
+            message=reply_to_user,
+            random_id=random.randint(1, 1000)
+        )
 
 
 def main():
