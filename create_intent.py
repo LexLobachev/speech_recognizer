@@ -28,7 +28,7 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
 
 
 def main():
-    project_id = config("PROJECT_ID")
+    project_id = config("GOOGLE_PROJECT_ID")
     with open("questions.json", "r", encoding='UTF-8') as file:
         intents = json.loads(file.read())
     for display_name, training_phrases in intents.items():
