@@ -17,10 +17,6 @@ def start(update: Update, context: CallbackContext):
     update.message.reply_text('Здравствуйте!')
 
 
-def help_command(update: Update, context: CallbackContext):
-    update.message.reply_text('Help!')
-
-
 def reply(update: Update, context: CallbackContext):
     reply_to_user = detect_intent_texts(project_id, str(update.effective_user.id), update.message.text, 'ru-Ru')
     if reply_to_user:
@@ -46,7 +42,6 @@ if __name__ == '__main__':
     while True:
         try:
             dispatcher.add_handler(CommandHandler("start", start))
-            dispatcher.add_handler(CommandHandler("help", help_command))
             dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, reply))
             updater.start_polling()
             updater.idle()
