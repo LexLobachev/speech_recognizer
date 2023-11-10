@@ -27,6 +27,7 @@ VK_BOT_TOKEN=your_vk_bot_token
 TELEGRAM_ADMIN_BOT_TOKEN=your_admin_telegram_bot_token
 TELEGRAM_CHAT_ID=your_telegram_chat_id
 TG_ADMIN_CHAT_ID=your_admin_telegram_chat_id
+QUESTIONS_PATH=path_to_file_with_phrases_dor_dialogflow
 ```  
 
 ## Run
@@ -41,6 +42,6 @@ $(venv) python vk_bot.py # VK - bot
 # Teaching bot 
 Script `create_intent.py` upload new answers and questions to service DialogFlow.
 
-```python
+```bash
 python create_intent.py
 ```
