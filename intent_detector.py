@@ -1,7 +1,7 @@
 from google.cloud import dialogflow
 
 
-def detect_intent_texts(project_id, session_id, text, language_code, is_fallback=True):
+def detect_intent_texts(project_id, session_id, text, language_code):
 
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
@@ -10,6 +10,6 @@ def detect_intent_texts(project_id, session_id, text, language_code, is_fallback
     response = session_client.detect_intent(
         request={"session": session, "query_input": query_input}
     )
-    if response.query_result.intent.is_fallback and is_fallback is False:
+    if response.query_result.intent.is_fallback:
         return None
     return response.query_result.fulfillment_text
