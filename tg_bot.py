@@ -5,22 +5,11 @@ from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from decouple import config
 
+from logs_handler import MyLogsHandler
 from intent_detector import detect_intent_texts
 
 
 logger = logging.getLogger("tg_logger")
-
-
-class MyLogsHandler(logging.Handler):
-
-    def __init__(self, tg_bot, chat_id):
-        super().__init__()
-        self.tg_bot = tg_bot
-        self.chat_id = chat_id
-
-    def emit(self, record):
-        log_entry = self.format(record)
-        self.tg_bot.send_message(chat_id=self.chat_id, text=log_entry)
 
 
 def start(update: Update, context: CallbackContext):
@@ -33,8 +22,7 @@ def help_command(update: Update, context: CallbackContext):
 
 
 def reply(update: Update, context: CallbackContext):
-    reply_to_user = detect_intent_texts(project_id, str(update.effective_user.id), update.message.text, 'ru-Ru',
-                                        is_fallback=False)
+    reply_to_user = detect_intent_texts(project_id, str(update.effective_user.id), update.message.text, 'ru-Ru')
     if reply_to_user:
         update.message.reply_text(reply_to_user)
 

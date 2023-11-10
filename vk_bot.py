@@ -5,26 +5,16 @@ import telegram
 import vk_api as vk
 from vk_api.longpoll import VkLongPoll, VkEventType
 from decouple import config
+
+from logs_handler import MyLogsHandler
 from intent_detector import detect_intent_texts
 
 
 logger = logging.getLogger("vk_logger")
 
 
-class MyLogsHandler(logging.Handler):
-
-    def __init__(self, tg_bot, chat_id):
-        super().__init__()
-        self.tg_bot = tg_bot
-        self.chat_id = chat_id
-
-    def emit(self, record):
-        log_entry = self.format(record)
-        self.tg_bot.send_message(chat_id=self.chat_id, text=log_entry)
-
-
 def reply(event, vk_api, project_id):
-    reply_to_user = detect_intent_texts(project_id, event.user_id, event.text, 'ru', is_fallback=False)
+    reply_to_user = detect_intent_texts(project_id, event.user_id, event.text, 'ru')
     if reply_to_user:
         vk_api.messages.send(
             user_id=event.user_id,
