@@ -13,12 +13,12 @@ from intent_detector import detect_intent_texts
 logger = logging.getLogger("tg_logger")
 
 
-def start(update: Update):
+def start(update: Update, context: CallbackContext):
     user = update.effective_user
     update.message.reply_text('Здравствуйте!')
 
 
-def reply(update: Update, project_id):
+def reply(update: Update, context: CallbackContext, project_id):
     reply_to_user = detect_intent_texts(project_id, str(update.effective_user.id), update.message.text, 'ru-Ru')
     if reply_to_user:
         update.message.reply_text(reply_to_user)
