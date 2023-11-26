@@ -22,6 +22,8 @@ def reply(update: Update, context: CallbackContext, project_id):
     reply_to_user = detect_intent_texts(project_id, str(update.effective_user.id), update.message.text, 'ru-Ru')
     if reply_to_user:
         update.message.reply_text(reply_to_user)
+    else:
+        update.message.reply_text('не совсем понимаю, о чем ты.')
 
 
 if __name__ == '__main__':
