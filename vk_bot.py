@@ -15,10 +15,10 @@ logger = logging.getLogger("vk_logger")
 
 def reply(event, vk_api, project_id):
     reply_to_user = detect_intent_texts(project_id, event.user_id, event.text, 'ru')
-    if reply_to_user:
+    if not reply_to_user.intent.is_fallback:
         vk_api.messages.send(
             user_id=event.user_id,
-            message=reply_to_user,
+            message=reply_to_user.fulfillment_text,
             random_id=random.randint(1, 1000)
         )
 
