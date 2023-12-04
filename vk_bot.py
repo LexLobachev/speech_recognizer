@@ -42,5 +42,5 @@ if __name__ == '__main__':
             for event in longpoll.listen():
                 if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                     reply(event, vk_api, project_id)
-        except Exception:
-            logger.exception(Exception)
+        except Exception as message:
+            logger.debug(message)
